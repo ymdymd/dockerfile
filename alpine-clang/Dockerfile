@@ -7,7 +7,7 @@
 #   run docker image command as follows
 #       % docker run -it {image_name}:{tag}
 #   e.g.,
-#       % docker run -t alpine-clang
+#       % docker run -it --name alpine-clang alpine-clang
 
 FROM alpine:latest
 
