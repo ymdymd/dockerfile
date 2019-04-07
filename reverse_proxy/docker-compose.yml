@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    image: nginx
+    volumes:
+      - ./web/conf.d:/etc/nginx/conf.d
+      # - ./web/nginx.conf:/etc/nginx/nginx.conf
+      - ./web/html:/usr/share/nginx/html
+
+  proxy:
+    image: nginx
+    ports:
+      - 80:80
+    links:
+      - web:webs
+    volumes:
+      # - ./proxy/conf.d:/etc/nginx/conf.d
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./proxy/html:/usr/share/nginx/html
+
+
+      
+
+
