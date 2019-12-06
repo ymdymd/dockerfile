@@ -34,6 +34,12 @@ WORKDIR ${HOME}
 # installing ROS from source
 # http://wiki.ros.org/kinetic/Installation/Source
 
+# Add apt sources
+RUN sudo apt-get install -y lsb-release && \
+    sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > \
+    /etc/apt/sources.list.d/ros-latest.list' && \
+    sudo apt-key adv --keyserver 'hkp://ha.pool.sks-keyservers.net:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
 # dependencies for ros install from source
 RUN sudo apt-get update && \
     sudo apt-get install -y \
@@ -75,6 +81,7 @@ RUN wstool init -j8 src kinetic-base-wet.rosinstall
 RUN rosdep install --from-paths src --ignore-src --os ubuntu:xenial --rosdistro kinetic -y
 
 # Building the catkin Workspace
-RUN  ./src/catkin/bin/catkin_make_isolated --install-space /opt/ros/kinetic --install -DCMAKE_BUILD_TYPE=Release
+RUN sudo mkdir -p /opt/ros/kinetic && \
+    sudo ./src/catkin/bin/catkin_make_isolated --install-space /opt/ros/kinetic --install -DCMAKE_BUILD_TYPE=Release
 
 # ENTRYPOINT ["/bin/bash", "-c"]
