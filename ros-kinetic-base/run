@@ -1,0 +1,7 @@
+#!/bin/bash
+set -x
+set -e
+
+IMAGE_NAME=$(basename $(pwd))
+
+docker run -it --rm "$IMAGE_NAME"
