@@ -84,4 +84,7 @@ RUN rosdep install --from-paths src --ignore-src --os ubuntu:xenial --rosdistro 
 RUN sudo mkdir -p /opt/ros/kinetic && \
     sudo ./src/catkin/bin/catkin_make_isolated --install-space /opt/ros/kinetic --install -DCMAKE_BUILD_TYPE=Release
 
+RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc && \
+    . ~/.bashrc
+
 # ENTRYPOINT ["/bin/bash", "-c"]
