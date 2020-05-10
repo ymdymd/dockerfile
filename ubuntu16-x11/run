@@ -1,0 +1,11 @@
+#!/bin/bash
+set -x
+set -e
+
+IMAGE_NAME=$(basename $(pwd))
+
+docker run -it --rm \
+    -e DISPLAY=${DISPLAY} \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    --network host \
+    "$IMAGE_NAME"

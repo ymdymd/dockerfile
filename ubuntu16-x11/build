@@ -1,0 +1,13 @@
+#!/bin/bash
+set -x
+set -e
+
+IMAGE_NAME=$(basename $(pwd))
+ARCHIVE_NAME="$IMAGE_NAME".tar
+USER_NAME=${1:-"$USER"}
+
+docker build -t "$IMAGE_NAME" --build-arg USER_NAME="$USER_NAME" .
+
+# docker build -t "$IMAGE_NAME" . &&    \
+# docker save "$IMAGE_NAME" > ../archives/"$ARCHIVE_NAME"
+
