@@ -1,0 +1,6 @@
+#!/bin/bash
+logdir=${1:-~/tf_logs}
+docker run --rm \
+    --network host \
+    -v ${logdir}:/tf_logs \
+    tensorboard 
